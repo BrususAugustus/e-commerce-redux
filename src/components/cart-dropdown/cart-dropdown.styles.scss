@@ -19,6 +19,12 @@
     flex-direction: column;
     overflow-y: scroll;
     scrollbar-width: 0;
+
+
+    .empty-cart{
+      margin:50px auto;
+      font-size: 25px;
+    }
   }
 
   button {
