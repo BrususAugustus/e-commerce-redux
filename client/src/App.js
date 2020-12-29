@@ -1,44 +1,25 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
 import "./App.css";
-
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Checkout from "./pages/checkout/checkout.component";
-
-
 import Header from "./components/header/header.component";
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "./redux/user/user.selector";
+import {checkUserSession} from "./redux/user/user.actions";
 
 //For updating firebase
 // import {addCollectionAndDocuments} from "./firebase/firebase.utils";
 // import {selectCollectionForPreview} from "./redux/shop/shop.selector"
 
-import {createStructuredSelector} from "reselect";
-import {selectCurrentUser} from "./redux/user/user.selector";
-import {checkUserSession} from "./redux/user/user.actions";
-
-class App extends React.Component {
-
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-
-
-    //Checks user's session
-    const {checkUserSession} = this.props;
-    checkUserSession();
-
-
-
+const App = ({checkUserSession, currentUser}) => {
     //For updating firebase inser 'collections' into the props
-
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
     //   if (userAuth) {
     //     const userRef = await createUserProfileDocument(userAuth);
-
     //     userRef.onSnapshot((snapShot) => {
     //       setCurrentUser({
     //         id: snapShot.id,
@@ -46,19 +27,15 @@ class App extends React.Component {
     //       });
     //     });
     //   }
-      
     //   setCurrentUser(userAuth);
       //For updating firebase
       // addCollectionAndDocuments("collections", collections.map( ({title, items}) => ({title,items}) )  )
-    
     // });
-  }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+    useEffect(()=>{
+      checkUserSession()
+    }, [checkUserSession])
 
-  render() {
     return (
       <div>
         <Header />
@@ -70,7 +47,7 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.currentUser ? (
+              currentUser ? (
                 <Redirect to="/" />
               ) : (
                 <SignInAndSignUpPage />
@@ -81,7 +58,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
 
 
 const mapStateToProps = createStructuredSelector({
