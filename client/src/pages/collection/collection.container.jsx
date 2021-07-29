@@ -1,17 +1,17 @@
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import WithSpinner from "../../components/with-spinner/with-spinner.component"
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
 import CollectionPage from "./collection.component";
 import { isCollectionsLoaded } from "../../redux/shop/shop.selector";
 import { compose } from "redux";
 
 const mapStateToProps = createStructuredSelector({
-    isLoading : state=> !isCollectionsLoaded(state)
-})
+  isLoading: (state) => !isCollectionsLoaded(state),
+});
 
 const CollectionPageContainer = compose(
-    connect(mapStateToProps),
-    WithSpinner
+  connect(mapStateToProps),
+  WithSpinner
 )(CollectionPage);
 
 export default CollectionPageContainer;

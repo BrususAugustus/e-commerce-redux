@@ -6,7 +6,7 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
-import {signOutStart} from "../../redux/user/user.actions";
+import { signOutStart } from "../../redux/user/user.actions";
 
 //Styled Components
 import {
@@ -44,7 +44,7 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectCartHidden,
 });
 
-const mapDispatchToProps = dispatch =>({
-  signOutStart: () => dispatch(signOutStart())
-})
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
