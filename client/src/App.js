@@ -16,6 +16,7 @@ const SignInAndSignUpPage = lazy(() =>
   import("./pages/sign-in-and-sign-up/sign-in-and-sign-up.component")
 );
 const Checkout = lazy(() => import("./pages/checkout/checkout.component"));
+const Contact = lazy(()=>import("./pages/contact/contact.component"))
 
 //For updating firebase
 // import {addCollectionAndDocuments} from "./firebase/firebase.utils";
@@ -52,6 +53,7 @@ const App = ({ checkUserSession, currentUser }) => {
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/contact" component={Contact}/>
             <Route
               exact
               path="/signin"
